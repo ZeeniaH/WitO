@@ -1,0 +1,12 @@
+module.exports.authService = require('./auth.service');
+module.exports.emailService = require('./email.service');
+module.exports.tokenService = require('./token.service');
+module.exports.userService = require('./user.service');
+module.exports.vehicleService = require('./vehicle.service');
+module.exports.companyService = require('./company.service');
+module.exports.workerService = require('./worker.service');
+module.exports.appointmentService = require('./appointment.service');
+module.exports.bookKeeperService = require('./bookKeeper.service');
+module.exports.companyOwnerService = require('./companyOwner.service');
+module.exports.calendarService = require('./calendar.service');
+module.exports.trackTimeService = require('./trackTime.service');

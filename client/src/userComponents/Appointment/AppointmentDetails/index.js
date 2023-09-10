@@ -1,0 +1,282 @@
+import React, { useEffect, useState } from "react";
+import { Backdrop, Box, Button, Container, Grid } from "@mui/material";
+import styles from "./appointmentDetails.module.scss";
+import Slide from "@mui/material/Slide";
+import { useParams } from "react-router-dom";
+import { BASE_URL } from "config";
+import Header from "../../Header";
+import AppointmentAsideBar from "../AppointmentAsideBar";
+import { setLoading } from "redux/actionCreators/loadingActionCreators";
+import { useDispatch } from "react-redux";
+import { useTranslation } from 'react-i18next';
+import useGoBack from '../../../hooks/useGoBack';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+	return <Slide direction="up" ref={ref} {...props} />;
+});
+
+function Index() {
+	const user = JSON.parse(localStorage.getItem("user"));
+	const [appointment, setAppointment] = useState({});
+	const { t } = useTranslation();
+	const params = useParams();
+	// const { user } = useAuthContext();
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const fetchAppointment = async () => {
+			dispatch(setLoading(true));
+			const response = await fetch(`${BASE_URL}/appointment/${params.id}`, {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${user.tokens.access.token}`,
+				},
+			});
+			const json = await response.json();
+			console.log(json);
+			if (response.ok) {
+				setAppointment(json);
+			}
+			dispatch(setLoading(false));
+		};
+		fetchAppointment();
+	}, []);
+
+	const getStatusColor = () => {
+		if (appointment.appointmentStatus === "completed") {
+			return "#52c41a";
+		}
+		else if (appointment.appointmentStatus === "pending") {
+			return "#7206ef";
+		} else if (appointment.appointmentStatus === "cancelled") {
+			return "#ff4d4f";
+		} return "";
+	};
+	return (
+		<>
+			<Header />
+
+			<Grid position="relative" container spacing={2}>
+				<Grid
+					item
+					xs={"auto"}
+					sx={{
+						position: {
+							md: "static",
+							xs: "absolute",
+						},
+						left: "0",
+						top: "0",
+						zIndex: "2",
+						height: {
+							xs: "100%",
+							md: "unset",
+						},
+					}}
+				>
+					{/* <AppointmentAsideBar companyId={params.id} /> */}
+				</Grid>
+				<Grid item xs>
+					<Box
+						sx={{
+							width: "100%",
+							minHeight: "100vh",
+							// paddingLeft: {
+							// 	xs: "80px",
+							// 	md: "16px",
+							// },
+						}}
+						className={styles.appointmentFormSection}
+					>
+						<Container>
+							<Box className={styles.appointmentsDetailsSection}>
+								<Grid sx={{ display: "flex", justifyContent: "space-between" }} container spacing={2}>
+									<Grid item md={6} xs={12}>
+										<Box>
+											<Button
+												sx={{ fontSize: "12px", mt: "15px" }}
+												variant="outlined"
+												onClick={useGoBack}
+												startIcon={<ArrowBackIcon />}
+											>
+												{t('Back')}
+											</Button>
+										</Box>
+										<Box className={styles.appointmentHeading} component={"h1"}>
+											{t('Appointment Details')}
+										</Box>
+									</Grid>
+									<Grid item md={6} xs={12}>
+										<Box
+											className={styles.accountStatus}>
+											<Box component={"h4"}>{t('Appointment Status')} :</Box>
+											<Box sx={{ ml: "10px" }} component={"h6"} style={{ textTransform: "capitalize", backgroundColor: getStatusColor() }}>  {appointment.appointmentStatus}</Box>
+										</Box>
+									</Grid>
+								</Grid>
+								<Box
+									className={`${styles.appointmentBox} ${styles.appointmentBoxTwo}`}
+								>
+									<Box className={styles.boxTile} component={"h4"}>{t('Company Details')}</Box>
+									<Grid container spacing={2}>
+										<Grid item md={6}>
+											<Box className={styles.appointmentBoxTwoContent}>
+												<table>
+													<tbody>
+														<tr>
+															<th>{t('Company')}</th>
+															<td>{appointment.selectCompany}</td>
+														</tr>
+														<tr className={styles.spacer}></tr>
+														<tr>
+															<th>{t('Address')}</th>
+															<td>{appointment?.companyId?.street}, {appointment?.companyId?.zip}, {appointment?.companyId?.city}</td>
+														</tr>
+													</tbody>
+												</table>
+											</Box>
+										</Grid>
+										<Grid item md={6}>
+											<Box className={styles.appointmentBoxTwoContent}>
+												<table>
+													<tbody>
+														<tr>
+															<th>{t('Email')}</th>
+															<td>{appointment?.companyId?.email}</td>
+														</tr>
+														<tr className={styles.spacer}></tr>
+														<tr>
+															<th>{t('Contact No')}.</th>
+															<td>{appointment?.companyId?.contactNo}</td>
+														</tr>
+													</tbody>
+												</table>
+											</Box>
+										</Grid>
+									</Grid>
+								</Box>
+								<Box
+									className={`${styles.appointmentBox} ${styles.appointmentBoxTwo}`}
+								>
+									<Box className={styles.boxTile} component={"h4"}>{t('Vehicle Details')}</Box>
+									<Grid container spacing={2}>
+										<Grid item md={6}>
+											<Box className={styles.appointmentBoxTwoContent}>
+												<table>
+													<tbody>
+														<tr>
+															<th>{t('Name')}</th>
+															<td>{appointment?.vehicleId?.makeName}</td>
+														</tr>
+														<tr className={styles.spacer}></tr>
+														<tr>
+															<th>{t('Model')}</th>
+															<td>{appointment?.vehicleId?.model}</td>
+														</tr>
+													</tbody>
+												</table>
+											</Box>
+										</Grid>
+										<Grid item md={6}>
+											<Box className={styles.appointmentBoxTwoContent}>
+												<table>
+													<tbody>
+														<tr>
+															<th>{t('License Plate')}</th>
+															<td>{appointment?.vehicleId?.licensePlate}</td>
+														</tr>
+														<tr className={styles.spacer}></tr>
+														<tr>
+															<th>{t('Mileage')}s</th>
+															<td>{appointment?.vehicleId?.mileage}</td>
+														</tr>
+													</tbody>
+												</table>
+											</Box>
+										</Grid>
+									</Grid>
+								</Box>
+								<Box
+									className={`${styles.appointmentBox} ${styles.appointmentBoxTwo}`}
+								>
+									<Box className={styles.boxTile} component={"h4"}>{t('Worker Details')}</Box>
+									<Grid container spacing={2}>
+										<Grid item md={6}>
+											<Box className={styles.appointmentBoxTwoContent}>
+												<table>
+													<tbody>
+														<tr>
+															<th>{t('Worker Name')}</th>
+															<td>{appointment?.selectWorker}</td>
+														</tr>
+														<tr className={styles.spacer}></tr>
+														<tr>
+															<th>{t('Personal Numbers')}</th>
+															<td>{appointment?.workerId?.personalNumber}</td>
+														</tr>
+														<tr className={styles.spacer}></tr>
+														<tr>
+															<th>{t('Phone Number')}</th>
+															<td > {appointment?.workerId?.phoneNumber}</td>
+														</tr>
+
+													</tbody>
+												</table>
+											</Box>
+										</Grid>
+										<Grid item md={6}>
+											<Box className={styles.appointmentBoxTwoContent}>
+												<table>
+													<tbody>
+														<tr>
+															<th>{t('Tax ID')}</th>
+															<td>{appointment?.workerId?.taxId}</td>
+														</tr>
+
+														<tr className={styles.spacer}></tr>
+														<tr>
+															<th>{t('Name of the Bank')}</th>
+															<td>{appointment?.workerId?.nameOfBank}</td>
+														</tr>
+														<tr className={styles.spacer}></tr>
+														<tr>
+															<th>{t('Email')}</th>
+															<td>{appointment?.workerId?.email}</td>
+														</tr>
+													</tbody>
+												</table>
+											</Box>
+										</Grid>
+									</Grid>
+								</Box>
+								<Box
+									className={`${styles.appointmentBox} ${styles.appointmentBoxTwo}`}
+								>
+									<Box className={styles.boxTile} component={"h4"}>{t('Further Details')}</Box>
+									<Grid container spacing={2}>
+										<Grid item md={6}>
+											<Box className={styles.appointmentBoxTwoContent}>
+												<table>
+													<tbody>
+														<tr>
+															<th> {t('Description')}</th>
+															<td>{appointment?.appointmentDescription}</td>
+														</tr>
+													</tbody>
+												</table>
+											</Box>
+										</Grid>
+									</Grid>
+								</Box>
+							</Box>
+						</Container>
+					</Box>
+				</Grid >
+			</Grid >
+		</>
+	);
+}
+
+export default Index;

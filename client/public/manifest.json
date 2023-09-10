@@ -1,0 +1,47 @@
+{
+	"short_name": "Witorbit",
+	"name": "Witorbit",
+	"icons": [
+		{
+			"src": "images/witorbit-logo.ico",
+			"sizes": "64x64 32x32 24x24 16x16",
+			"type": "image/x-icon"
+		},
+		{
+			"src": "images/witorbit-logo-192.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		},
+		{
+			"src": "images/witorbit-logo-512.png",
+			"type": "image/png",
+			"sizes": "512x512",
+			"purpose": "maskable"
+		},
+		{
+			"src": "images/ios/60.png",
+			"sizes": "60x60",
+			"type": "image/png",
+			"ios": true
+		  },
+		  {
+			"src": "images/ios/120.png",
+			"sizes": "120x120",
+			"type": "image/png",
+			"ios": true
+		  },
+		  {
+			"src": "images/ios/180.png",
+			"sizes": "180x180",
+			"type": "image/png",
+			"ios": true
+		  }
+		],
+		"start_url": ".",
+		"display": "standalone",
+		"theme_color": "#000000",
+		"background_color": "#ffffff",
+		"splash_pages": null,
+		"prefer_related_applications": false,
+		"related_applications": []
+}

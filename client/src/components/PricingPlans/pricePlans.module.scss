@@ -1,0 +1,29 @@
+.pricePlanSection {
+    background-repeat: no-repeat;
+    background-size: inherit;
+    background-position: center;
+    padding: 40px 32px;
+    margin-top: 40px;
+    background-color: #5524d4;
+    .cardMain {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.3s ease-in-out;
+        height: 100%;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        &:hover {
+            transform: scale(1.08);
+            border: 1px solid #1976d2;
+        }
+    }
+    .cardMain:hover .cardButton {
+        color: #fff;
+        border-color: rgb(25, 118, 210);
+        background-color: rgb(25, 118, 210);
+    }
+    .cardButton {
+        color: #262626;
+        border-color: #262626;
+    }
+}

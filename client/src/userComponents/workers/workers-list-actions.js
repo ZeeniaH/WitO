@@ -1,0 +1,150 @@
+import React, { useState } from "react";
+import { Typography, Popover, MenuList, MenuItem, ListItemIcon, StepButton, StepLabel, styled } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import IconButton from "@mui/material/IconButton";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { Link } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { BASE_URL } from "config";
+import { useConfirm } from "material-ui-confirm";
+import { setLoading } from "redux/actionCreators/loadingActionCreators";
+import { useDispatch } from "react-redux";
+import ImportExportIcon from '@mui/icons-material/ImportExport';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
+
+
+function Actions({ workerId, fetchWorkers }) {
+	const [anchorEl, setAnchorEl] = useState();
+	const user = JSON.parse(localStorage.getItem("user"));
+	const confirm = useConfirm();
+	const dispatch = useDispatch();
+
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+
+	const handleDelete = async (id) => {
+		confirm({
+			description: "Are you sure you want to delete this item? You can not undo this action.",
+			confirmationText: "yes",
+			cancellationText: "No",
+		})
+			.then(async () => {
+				dispatch(setLoading(true));
+				const response = await fetch(`${BASE_URL}/worker/${id}`, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${user.tokens.access.token}`,
+					},
+				});
+				// const json = await response.json();
+				if (response.ok) {
+					fetchWorkers();
+					handleClose();
+				}
+				dispatch(setLoading(false));
+			})
+			.catch(() => { });
+	};
+
+	const open = Boolean(anchorEl);
+	const id = open ? "simple-popover" : undefined;
+	return (
+		<>
+			<IconButton
+				aria-label="settings"
+				aria-describedby={id}
+				variant="contained"
+				onClick={handleClick}
+			>
+				<MoreVertIcon />
+			</IconButton>
+			<Popover
+				id={id}
+				open={open}
+				anchorEl={anchorEl}
+				onClose={handleClose}
+				anchorOrigin={{
+					vertical: "bottom",
+					horizontal: "right",
+				}}
+				transformOrigin={{
+					vertical: "top",
+					horizontal: "right",
+				}}
+			>
+				<MenuList>
+					<Link
+						to={`/home/worker/${workerId}`}
+						style={{ textDecoration: "none", color: "inherit" }}
+					>
+						<MenuItem color="theme.primary">
+							<ListItemIcon>
+								<VisibilityIcon fontSize="small" />
+							</ListItemIcon>
+							<Typography variant="inherit">View</Typography>
+						</MenuItem>
+					</Link>
+					<Link to={`/home/worker-list/$${companyId}/worker-time/${workerId}`} style={{ textDecoration: 'none' }}>
+						<MenuItem>
+							<ListItemIcon>
+								<AccessTimeFilledIcon fontSize="small" />
+							</ListItemIcon>
+							<Typography sx={{ color: "rgb(38, 38, 38)" }} variant="inherit">
+								Worker Time
+							</Typography>
+						</MenuItem>
+					</Link>
+					{/* <Link to={`/home/worker-list/$${companyId}/worker-data/${workerId}`} style={{ textDecoration: 'none' }}>
+						<MenuItem>
+							<ListItemIcon>
+								<DocumentScannerIcon fontSize="small" />
+							</ListItemIcon>
+							<Typography sx={{ color: "rgb(38, 38, 38)" }} variant="inherit">
+								Worker Data
+							</Typography>
+						</MenuItem>
+					</Link> */}
+					<Link to={`/home/worker-list/$${companyId}/data-worker/${workerId}`} style={{ textDecoration: 'none' }}>
+						<MenuItem>
+							<ListItemIcon>
+								<ImportExportIcon fontSize="small" />
+							</ListItemIcon>
+							<Typography sx={{ color: "rgb(38, 38, 38)" }} variant="inherit">
+								Export data to worker
+							</Typography>
+						</MenuItem>
+					</Link>
+					<Link
+						to={`/home/edit-worker/${workerId}`}
+						style={{ textDecoration: "none", color: "inherit" }}
+					>
+						<MenuItem>
+							<ListItemIcon>
+								<EditIcon fontSize="small" />
+							</ListItemIcon>
+							<Typography variant="inherit">Edit</Typography>
+						</MenuItem>
+					</Link>
+					<MenuItem onClick={() => handleDelete(workerId)}>
+						<ListItemIcon>
+							<DeleteIcon fontSize="small" />
+						</ListItemIcon>
+						<Typography variant="inherit">Delete</Typography>
+					</MenuItem>
+
+				</MenuList>
+
+			</Popover>
+		</>
+	);
+}
+
+export default Actions;

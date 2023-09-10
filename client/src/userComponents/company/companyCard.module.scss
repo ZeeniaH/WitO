@@ -1,0 +1,50 @@
+.companyBox {
+    position: relative;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgb(170 170 170 / 8%),
+        2px 0 10px rgb(170 170 170 / 8%), -2px 0 10px rgb(170 170 170 / 8%),
+        0 -2px 10px rgb(170 170 170 / 8%);
+    .companyContent {
+        padding: 35px 0;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .companyImage {
+            display: block !important;
+            text-align: center;
+            & img {
+                object-fit: contain;
+            }
+        }
+        .companyTitle {
+            padding: 12px 0 0 0;
+            text-align: center;
+            font-family: system-ui;
+        }
+    }
+    .dropDownMenu {
+        text-align: center;
+        border-radius: 0 0 15px 15px;
+        background: #5e27ff;
+        z-index: 9;
+        width: 100%;
+        box-shadow: 0 2px 5px rgb(170 170 170 / 8%),
+            2px 0 5px rgb(170 170 170 / 8%), -2px 0 5px rgb(170 170 170 / 8%);
+
+        & ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            & a {
+                display: inline-block;
+                width: 100%;
+                padding: 12px 5px;
+                color: #fff;
+                font-weight: 700;
+                text-decoration: none;
+            }
+        }
+    }
+}

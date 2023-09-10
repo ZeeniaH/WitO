@@ -1,0 +1,35 @@
+.invoiceSection {
+    .companyImage {
+        display: block !important;
+        text-align: center;
+        & img {
+            object-fit: contain;
+        }
+    }
+    .invoiceLeftSide {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        .invoiceLeftTitle {
+            width: 65px;
+        }
+    }
+    .invoiceRight {
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 10px;
+        .invoiceRightTitle {
+            width: 65px;
+            ::before {
+                content: "";
+                padding: 2px 5px;
+                border-radius: 9px;
+                margin-right: 5px;
+                background-color: #84b0ca;
+            }
+        }
+    }
+    .invoiceLeftSideValue {
+        margin-left: 10px;
+    }
+}

@@ -1,0 +1,70 @@
+.editButton {
+	button {
+		border-radius: 4px;
+		font-size: 12px;
+		font-weight: 700;
+		height: 38px;
+		background-color: #a071ff;
+		color: #fff;
+		min-width: 100px;
+		padding: 0 10px;
+		@media only screen and (max-width: 600px) {
+			width: 100%;
+		}
+	}
+}
+.userrEditFormSection {
+	padding: 40px 10px 0 0;
+	.rightSideSection {
+		h2 {
+			@media only screen and (max-width: 600px) {
+				font-size: 20px;
+				text-align: center;
+			}
+		}
+		.editUserrFieldsBody {
+			text-align: center;
+
+			.editUserrFields {
+				background: #fff;
+				border-radius: 2px;
+				padding: 30px 20px;
+				position: relative;
+				text-align: left;
+				.datePicker {
+					width: 100%;
+					margin: 10px auto;
+				}
+
+				.textField {
+					margin: 10px auto;
+					width: 100%;
+				}
+				.fileSelect {
+					display: block;
+					color: #34495e;
+					cursor: pointer;
+					height: 50px;
+					line-height: 40px;
+					text-align: left;
+					background: #ffffff;
+					overflow: hidden;
+					position: relative;
+					width: 100%;
+					.fileSelectButton {
+						background: #dce4ec;
+						padding: 0 10px;
+						display: inline-block;
+						height: 100%;
+						line-height: 50px;
+					}
+					.fileSelectName {
+						line-height: 40px;
+						display: inline-block;
+						padding: 0 10px;
+					}
+				}
+			}
+		}
+	}
+}

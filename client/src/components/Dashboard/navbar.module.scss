@@ -1,0 +1,99 @@
+// mixins
+@mixin gradient_background {
+    background: #0065fe; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to top,
+        #0065fe,
+        #0065fe
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to top,
+        #0065fe,
+        #0065fe
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+// navbar
+.navbar-main-container {
+    background-color: #0065fe;
+    border-top-right-radius: 60px;
+}
+.navbar {
+    display: block;
+    min-height: calc(100vh - 88px);
+    color: #fff;
+    position: relative;
+    border-radius: 0 60px 0 0;
+    nav {
+        @include gradient_background();
+        border-radius: 0 60px 0 0;
+        overflow: hidden;
+        min-height: calc(100vh - 88px);
+
+        .logo {
+            width: 60%;
+            margin: auto;
+            padding: 40px 0;
+            z-index: 999;
+            position: relative;
+            font-size: 23px;
+        }
+    }
+    svg {
+        color: #fff;
+    }
+    .MuiListItem-button {
+        z-index: 999;
+    }
+    a {
+        color: #fff;
+        display: block;
+        width: 90%;
+        margin: 0 0 0 auto;
+        .MuiListItem-button:hover {
+            background-color: transparent !important;
+        }
+        .MuiListItemIcon-root {
+            min-width: 35px !important;
+        }
+    }
+    a.active {
+        background: #f5f6fb;
+        color: #0065fe;
+        border-radius: 30px 0 0 30px;
+        position: relative;
+        svg {
+            color: #0065fe;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            background-color: #0065fe;
+            top: 100%;
+            right: 0;
+            height: 93px;
+            width: 94px;
+            border-radius: 0 55px 0px 0;
+            box-shadow: 5px -32px 0 0 #f5f6fb;
+            z-index: 0;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            background-color: #0065fe;
+            bottom: 100%;
+            right: 0;
+            height: 93px;
+            width: 94px;
+            border-radius: 0 0 55px 0;
+            box-shadow: 5px 32px 0 0 #f5f6fb;
+            z-index: 0;
+        }
+    }
+    .MuiListItem-button:hover {
+        text-decoration: none;
+        background-color: transparent !important;
+    }
+}

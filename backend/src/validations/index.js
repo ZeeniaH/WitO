@@ -1,0 +1,9 @@
+module.exports.authValidation = require('./auth.validation');
+module.exports.userValidation = require('./user.validation');
+module.exports.vehicleValidation = require('./vehicle.validation');
+module.exports.companyValidation = require('./company.validation');
+module.exports.workerValidation = require('./worker.validation');
+module.exports.appointment = require('./appointment.validation');
+module.exports.calendar = require('./calendar.validation');
+module.exports.trackTime = require('./trackTime.validation');
+module.exports.clientValidation = require('./client.validation');

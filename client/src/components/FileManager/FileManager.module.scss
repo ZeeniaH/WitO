@@ -1,0 +1,16 @@
+.fileManagerSection {
+  padding: 60px 0;
+  .fileManagerMain {
+    padding: 20px 40px;
+    text-align: center;
+    @media only screen and (max-width: 600px) {
+      padding: unset;
+    }
+    .fileManagerContent {
+      svg {
+        font-size: 80px;
+        color: #27405e;
+      }
+    }
+  }
+}

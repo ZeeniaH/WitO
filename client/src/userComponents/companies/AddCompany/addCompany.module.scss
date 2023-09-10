@@ -1,0 +1,49 @@
+.addCompanyFormSection {
+    .rightSideSection {
+        padding: 0 22px;
+        .companyHeading {
+            margin: 15px auto;
+            font-size: 26px;
+        }
+        .addCompanyFieldsBody {
+            text-align: center;
+
+            .companyFields {
+                background: #fff;
+                border-radius: 2px;
+                padding: 20px;
+                position: relative;
+                text-align: left;
+
+                .textField {
+                    margin: 10px auto;
+                    width: 100%;
+                }
+                .fileSelect {
+                    display: block;
+                    color: #34495e;
+                    cursor: pointer;
+                    height: 50px;
+                    line-height: 40px;
+                    text-align: left;
+                    background: #ffffff;
+                    overflow: hidden;
+                    position: relative;
+                    width: 100%;
+                    .fileSelectButton {
+                        background: #dce4ec;
+                        padding: 0 10px;
+                        display: inline-block;
+                        height: 100%;
+                        line-height: 50px;
+                    }
+                    .fileSelectName {
+                        line-height: 40px;
+                        display: inline-block;
+                        padding: 0 10px;
+                    }
+                }
+            }
+        }
+    }
+}

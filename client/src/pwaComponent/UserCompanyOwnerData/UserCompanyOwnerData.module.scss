@@ -1,0 +1,28 @@
+.fileManagerSection {
+    text-align: center;
+    .fileManagerHeading {
+        padding-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .fileManagerContent {
+        display: flex;
+        justify-content: center;
+    }
+    .fileLink {
+        text-decoration: none;
+        .fileManagerBox {
+            width: 70px;
+            background-color: #9dc5c717;
+            padding: 10px;
+        }
+        .fileIcon {
+            font-size: 38px;
+            color: #000;
+        }
+        .fileName {
+            color: #000;
+            margin: 0;
+        }
+    }
+}

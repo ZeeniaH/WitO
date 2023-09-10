@@ -1,0 +1,47 @@
+.userProfile {
+    background: #4f80ff;
+    height: "100vh";
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+    padding: 25px 0 0 0;
+    .topButton {
+        padding: 0;
+        margin-bottom: 20px;
+        font-size: 18px;
+        border: none;
+        color: #fff;
+    }
+    .informationSection {
+        margin-top: 30px;
+        padding: 45px 20px;
+        background: #f7f8f9;
+        border-top-left-radius: 35px;
+        border-top-right-radius: 35px;
+        .infoContent {
+            background: #fff;
+            height: auto;
+            padding: 15px;
+
+            border-radius: 10px;
+            .infoTitle {
+                font-size: 14px;
+                color: #625975;
+            }
+            .iconCircle {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 30px;
+                height: 30px;
+                color: rgb(27, 201, 150);
+                background: #f7f8f9;
+                border-radius: 50%;
+            }
+            .infoText {
+                color: #402e42;
+                padding-top: 15px;
+                font-weight: bold;
+            }
+        }
+    }
+}

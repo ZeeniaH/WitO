@@ -1,0 +1,57 @@
+.workerFormSection {
+    .rightSideSection {
+        .workerHeading {
+            margin-bottom: 15px;
+            font-size: 26px;
+
+            @media only screen and (max-width: 600px) {
+                font-size: 20px;
+                text-align: center;
+            }
+        }
+        .addWorkerFieldsBody {
+            text-align: center;
+
+            .workerFields {
+                background: #fff;
+                border-radius: 2px;
+                padding: 30px 20px;
+                position: relative;
+                text-align: left;
+                .datePicker {
+                    width: 100%;
+                    margin: 10px auto;
+                }
+
+                .textField {
+                    margin: 10px auto;
+                    width: 100%;
+                }
+                .fileSelect {
+                    display: block;
+                    color: #34495e;
+                    cursor: pointer;
+                    height: 50px;
+                    line-height: 40px;
+                    text-align: left;
+                    background: #ffffff;
+                    overflow: hidden;
+                    position: relative;
+                    width: 100%;
+                    .fileSelectButton {
+                        background: #dce4ec;
+                        padding: 0 10px;
+                        display: inline-block;
+                        height: 100%;
+                        line-height: 50px;
+                    }
+                    .fileSelectName {
+                        line-height: 40px;
+                        display: inline-block;
+                        padding: 0 10px;
+                    }
+                }
+            }
+        }
+    }
+}
